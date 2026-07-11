@@ -2,15 +2,16 @@
 
 #Clearing global environment and loading necessary packages
 rm(list = ls())
-setwd("D:/Documents/Universiteit - Master/Research Project 2/GitHub/RP2_code_publication") #The full path to the folder with this script and the data should be specified between quotation brackets
+setwd("") #The full path to the folder with this script and the data should be specified between quotation brackets
 library(tidyverse)
 library(data.table)
 library(lubridate)
 library(DescTools)
+library(crayon)
 
 #Loading relevant files
-RepurposingDB <- read.delim("repurposing and type II for rstud with index.txt")
-EMRD <- read.delim("EMRD_for_rstud.txt")
+RepurposingDB <- read.delim("DATA/repurposing and type II for rstud with index.txt")
+EMRD <- read.delim("DATA/EMRD_for_rstud.txt")
 
 
 #Filtering repurposed drugs from the repurposingDB (Muizelaar et al., 2025)
@@ -81,9 +82,10 @@ substance_based_matches_export <- substance_based_matches_export %>%
   )
 
 #Export lists to folder
-write.csv(repurposed_orphans_export, file = "repurposed orphans.csv", row.names = FALSE)
-write.csv(substance_based_matches_export, file = "substance based matches.csv", row.names = FALSE)
+write.csv(repurposed_orphans_export, file = "OUTPUT/repurposed orphans.csv", row.names = FALSE)
+write.csv(substance_based_matches_export, file = "OUTPUT/substance based matches.csv", row.names = FALSE)
 
 #Necessary warning messages
 writeLines("THE LIST CONTAINED IN SUBSTANCE BASED MATCHES MAY CONTAIN FALSE POSITIVE CASES AND SHOULD BE MANUALLY CHECKED FOR ORPHAN STATUS AND REPURPOSING CLASSIFICATION", "IMPORTANT READ ME.txt")
-cat("\n Script completed. \n IMPORTANT NOTE: THE LIST CONTAINED IN SUBSTANCE BASED MATCHES MAY CONTAIN FALSE POSITIVE CASES AND SHOULD BE MANUALLY CHECKED FOR ORPHAN STATUS AND REPURPOSING CLASSIFICATION")
+cat(bold(green("\n Script completed.")))
+cat(bold(yellow("\n IMPORTANT NOTE: THE LIST CONTAINED IN SUBSTANCE BASED MATCHES MAY CONTAIN FALSE POSITIVE CASES AND SHOULD BE MANUALLY CHECKED FOR ORPHAN STATUS AND REPURPOSING CLASSIFICATION")))

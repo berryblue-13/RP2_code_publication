@@ -1,0 +1,6 @@
+#Ignoring data files for security reasons
+
+*txt
+*.html
+*.RData
+*.RHistory
